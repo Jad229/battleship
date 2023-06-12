@@ -123,3 +123,13 @@ describe("gameboardFactory", () => {
     });
   });
 });
+
+test("Should return true when length 1 ship is hit", () => {
+  let gameboard = gameboardFactory();
+
+  gameboard.placeShip([0, 0], [0, 0], 1);
+
+  gameboard.receiveAttack([0, 0]);
+
+  expect(gameboard.allShipsSunk()).toBe(true);
+});
