@@ -11,25 +11,54 @@ export default function gameboardFactory() {
   function placeShip(start, end, shipLength) {
     const ship = shipFactory(shipLength);
 
-    // TODO: check if the space is free and if the ship can fit in the provided range.
     // TODO: test for boundaries and make sure coordinates are valid
+    //for each coordinate check if its between the board boundaries.
+    if (_isValidCoords(start) && _isValidCoords(end)) {
+      // if the start row and end row are the same the ship is being placed horizontally else it places vertically
+      if (start[0] === end[0]) {
+        //ship is horizontal
+        // TODO: check if the space is free and if the ship can fit in the provided range.
+        let shipSpace = _board[start[0]].slice(start[1], end[1] + 1); // slice row from start column to end column
+        let isOverlap = shipSpace.some((space) => space !== null); //check if any of the spaces are not empty if so there is overlap
+        let isCorrectLength = shipSpace.length === shipLength; //shipSpace.length should be equal to the shipLength
 
-    // TODO: Add the ship to the board at the given coordinates.
-    // if the start row and end row are the same the ship is being places horizontally else it places vertically
-    if (start[0] == end[0]) {
-      // let the counter equal the column indices
-      for (let i = start[1]; i <= end[1]; i++) {
-        _board[start[0]][i] = ship;
+        // TODO: Add the ship to the board at the given coordinates.
+        if (!isOverlap && isCorrectLength) {
+          // let the counter equal the column indices
+          for (let i = start[1]; i <= end[1]; i++) {
+            _board[start[0]][i] = ship;
+          }
+        } else {
+          throw new Error("Invalid ship placement");
+        }
+      } else if (start[1] === end[1]) {
+        //ship is vertical
+
+        let shipSpace = _board
+          .map((row) => row[start[1]]) //using map because we want the elements of each column
+          .slice(start[0], end[0] + 1);
+        let isOverlap = shipSpace.some((space) => space !== null);
+        let isCorrectLength = shipSpace.length === shipLength;
+        if (!isOverlap && isCorrectLength) {
+          // let the counter equal the row indices
+          for (let i = start[0]; i <= end[0]; i++) {
+            _board[i][start[1]] = ship;
+          }
+        } else {
+          throw new Error("Invalid ship placement");
+        }
       }
-    } else if (start[1] == end[1]) {
-      // let the counter equal the row indices
-      for (let i = start[0]; i <= end[0]; i++) {
-        _board[i][start[1]] = ship;
-      }
+
+      ships.push(ship);
     }
-
-    ships.push(ship);
   }
+
+  function _isValidCoords(coordinates) {
+    return coordinates.every((coordinate) => {
+      return coordinate >= 0 && coordinate <= 9;
+    });
+  }
+
   function getBoard() {
     return _board;
   }

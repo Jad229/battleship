@@ -48,3 +48,39 @@ test("Should place ship of length 3 at (3,4) vertically", () => {
   expect(board[5][4]).toBeTruthy();
   expect(board[6][4]).toBeFalsy();
 });
+
+test("Should not place ship of length 3 at (3,4) horizontally if there is already a ship there", () => {
+  const gameboard = gameboardFactory();
+
+  gameboard.placeShip([3, 4], [3, 6], 3);
+
+  expect(() => {
+    gameboard.placeShip([3, 4], [3, 6], 3);
+  }).toThrowError("Invalid ship placement");
+});
+
+test("Should not place ship of length 3 at (3,4) vertically if there is already a ship there", () => {
+  const gameboard = gameboardFactory();
+
+  gameboard.placeShip([3, 4], [5, 4], 3);
+
+  expect(() => {
+    gameboard.placeShip([3, 4], [5, 4], 3);
+  }).toThrowError("Invalid ship placement");
+});
+
+test("Should not place ship of length 3 at (3,4) horizontally if end coordinates are for a ship of length 2", () => {
+  const gameboard = gameboardFactory();
+
+  expect(() => {
+    gameboard.placeShip([3, 4], [3, 5], 3);
+  }).toThrowError("Invalid ship placement");
+});
+
+test("Should not place ship of length 3 at (3,4) vertically if end coordinates are for a ship of length 2", () => {
+  const gameboard = gameboardFactory();
+
+  expect(() => {
+    gameboard.placeShip([3, 4], [4, 4], 3);
+  }).toThrowError("Invalid ship placement");
+});
