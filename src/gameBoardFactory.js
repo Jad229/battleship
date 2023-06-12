@@ -5,7 +5,7 @@ export default function gameboardFactory() {
   const _board = Array(boardSize) // creates a board of size boardSize x boardSize
     .fill()
     .map(() => Array(boardSize).fill(null)); //using map to make sure that you can make changes to each array within the rows
-  const missedAttacks = [];
+  const _missedAttacks = [];
   const ships = [];
 
   function placeShip(start, end, shipLength) {
@@ -59,8 +59,29 @@ export default function gameboardFactory() {
     });
   }
 
+  function receiveAttack(coordinates) {
+    // TODO: Check if there's a ship at the given coordinates.
+    let ship = _board[coordinates[0]][coordinates[1]];
+
+    // If there is a ship there, call its `hit` method.
+    if (ship !== null) {
+      ship.hit();
+    } else if (ship === null) {
+      // If there isn't, add the coordinates to `missedAttacks`.
+      _missedAttacks.push(coordinates.join(","));
+    }
+  }
+
+  function allShipsSunk() {
+    return ships.every((ship) => ship.isSunk());
+  }
+
+  function getMissedAttacks() {
+    return _missedAttacks;
+  }
+
   function getBoard() {
     return _board;
   }
-  return { placeShip, getBoard };
+  return { placeShip, getBoard, receiveAttack, allShipsSunk, getMissedAttacks };
 }

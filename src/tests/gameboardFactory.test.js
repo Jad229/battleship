@@ -84,3 +84,42 @@ test("Should not place ship of length 3 at (3,4) vertically if end coordinates a
     gameboard.placeShip([3, 4], [4, 4], 3);
   }).toThrowError("Invalid ship placement");
 });
+
+describe("gameboardFactory", () => {
+  // Initialize gameboard before each test
+  let gameboard;
+  beforeEach(() => {
+    gameboard = gameboardFactory();
+  });
+
+  describe("Gameboard receiveAttack function", () => {
+    let gameboard;
+
+    beforeEach(() => {
+      gameboard = gameboardFactory(); // Initialize a new gameboard before each test
+    });
+
+    test("should hit a ship if one is at the provided coordinates", () => {
+      // Place a ship at the start of the board
+      gameboard.placeShip([0, 0], [0, 2], 3);
+
+      // Attack the ship
+      gameboard.receiveAttack([0, 0]);
+
+      // We get the ship from the board to check the hit count
+      const ship = gameboard.getBoard()[0][0];
+
+      // Check if the ship was hit
+      expect(ship.getHitCount()).toBe(1);
+    });
+
+    test("should not hit a ship if there is none at the provided coordinates", () => {
+      // Attack an empty space
+      gameboard.receiveAttack([0, 0]);
+
+      let missedAttacks = gameboard.getMissedAttacks();
+      // The attacked coordinate should be in the list of missed attacks
+      expect(missedAttacks.includes("0,0")).toBe(true);
+    });
+  });
+});

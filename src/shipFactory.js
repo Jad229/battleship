@@ -7,8 +7,12 @@ export default function shipFactory(length) {
     if (_hitCount == length) return true;
     else return false;
   };
+  const getHitCount = () => {
+    return _hitCount;
+  };
   return {
     hit,
     isSunk,
+    getHitCount,
   };
 }
