@@ -11,6 +11,9 @@ export default function gameboardFactory() {
   function placeShip(start, end, shipLength) {
     const ship = shipFactory(shipLength);
 
+    // TODO: check if the space is free and if the ship can fit in the provided range.
+    // TODO: test for boundaries and make sure coordinates are valid
+
     // TODO: Add the ship to the board at the given coordinates.
     // if the start row and end row are the same the ship is being places horizontally else it places vertically
     if (start[0] == end[0]) {
@@ -24,8 +27,6 @@ export default function gameboardFactory() {
         _board[i][start[1]] = ship;
       }
     }
-    // TODO: check if the space is free and if the ship can fit in the provided range.
-    // TODO: test for boundaries and make sure coordinates are valid
 
     ships.push(ship);
   }
