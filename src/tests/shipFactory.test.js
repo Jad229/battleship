@@ -1,7 +1,7 @@
-import { default as ShipFactory, default as shipFactory } from "../shipFactory";
+import shipFactory from "../shipFactory";
 
 test("Should hit ship once", () => {
-  const ship = ShipFactory(4);
+  const ship = shipFactory(4);
   let hitCount = 0;
 
   hitCount = ship.hit();
@@ -9,7 +9,7 @@ test("Should hit ship once", () => {
 });
 
 test("Should hit ship 3 times", () => {
-  const ship = ShipFactory(4);
+  const ship = shipFactory(4);
   let hitCount = 0;
 
   hitCount = ship.hit();
