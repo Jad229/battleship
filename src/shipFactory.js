@@ -1,10 +1,14 @@
 export default function shipFactory(length) {
-  let _hit = 0;
+  let _hitCount = 0;
   const hit = () => {
-    return ++_hit;
+    return ++_hitCount;
   };
-
+  const isSunk = () => {
+    if (_hitCount == length) return true;
+    else return false;
+  };
   return {
     hit,
+    isSunk,
   };
 }
