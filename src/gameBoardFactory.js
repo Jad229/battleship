@@ -8,7 +8,27 @@ export default function gameboardFactory() {
   const missedAttacks = [];
   const ships = [];
 
-  function placeShip(start, end, shipLength) {}
+  function placeShip(start, end, shipLength) {
+    const ship = shipFactory(shipLength);
+
+    // TODO: Add the ship to the board at the given coordinates.
+    // if the start row and end row are the same the ship is being places horizontally else it places vertically
+    if (start[0] == end[0]) {
+      // let the counter equal the column indices
+      for (let i = start[1]; i <= end[1]; i++) {
+        _board[start[0]][i] = ship;
+      }
+    } else if (start[1] == end[1]) {
+      // let the counter equal the row indices
+      for (let i = start[0]; i <= end[0]; i++) {
+        _board[i][start[1]] = ship;
+      }
+    }
+    // TODO: check if the space is free and if the ship can fit in the provided range.
+    // TODO: test for boundaries and make sure coordinates are valid
+
+    ships.push(ship);
+  }
   function getBoard() {
     return _board;
   }
