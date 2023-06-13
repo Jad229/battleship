@@ -1,13 +1,13 @@
-import Player from "./playerFactory";
+import playerFactory from "./playerFactory";
 
 export default function computerFactory(name, gameboard) {
-  const player = new Player(name, gameboard);
+  const player = new playerFactory(name, gameboard);
 
   const randomAttack = () => {
     let coords;
     do {
       coords = _randomCoords();
-    } while (!_isLegalMove(coords));
+    } while (!isLegalMove(coords));
     player.attack(coords);
   };
 
