@@ -1,4 +1,4 @@
-import gameboardFactory from "../gameBoardFactory";
+import gameboardFactory from "../factories/gameboardFactory";
 
 test("Should return the initial state of the game board", () => {
   const gameboard = gameboardFactory();
