@@ -16,5 +16,9 @@ export default function playerFactory(name, gameboard) {
     return !_previousMoves.has(coords.join(","));
   };
 
-  return { attack, isLegalMove };
+  const getGameboard = () => {
+    return _gameboard;
+  };
+
+  return { attack, isLegalMove, getGameboard };
 }

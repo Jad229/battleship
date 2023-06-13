@@ -1,0 +1,17 @@
+.board-section {
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto;
+}
+.board {
+  display: grid;
+  grid-template: repeat(10, 1fr) / repeat(10, 1fr);
+  width: 420px;
+  height: 420px;
+}
+
+.cell {
+  border: 1px solid #000;
+  width: 40px;
+  height: 40px;
+}
