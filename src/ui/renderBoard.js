@@ -7,7 +7,13 @@ export default function renderBoard(board, container) {
     row.forEach((cell, j) => {
       const cellElement = document.createElement("div");
       cellElement.classList.add("cell");
-      cellElement.id = j;
+      // Calculate the unique id
+      const id = i * 10 + j;
+      cellElement.id = id;
+
+      // Assign the coordinates to the cell
+      cellElement.setAttribute("data-x", i);
+      cellElement.setAttribute("data-y", j);
 
       container.appendChild(cellElement);
     });

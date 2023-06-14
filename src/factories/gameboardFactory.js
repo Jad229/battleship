@@ -14,7 +14,7 @@ export default function gameboardFactory() {
     // TODO: test for boundaries and make sure coordinates are valid
     //for each coordinate check if its between the board boundaries.
     if (_isValidCoords(start) && _isValidCoords(end)) {
-      // if the start row and end row are the same the ship is being placed horizontally else it places vertically
+      // If the start row and end row are the same the ship is being placed horizontally else it places vertically
       if (start[0] === end[0]) {
         //ship is horizontal
         // TODO: check if the space is free and if the ship can fit in the provided range.
@@ -29,7 +29,7 @@ export default function gameboardFactory() {
             _board[start[0]][i] = ship;
           }
         } else {
-          throw new Error("Invalid ship placement");
+          return false; // If the ship placement is invalid, return false
         }
       } else if (start[1] === end[1]) {
         //ship is vertical
@@ -45,12 +45,15 @@ export default function gameboardFactory() {
             _board[i][start[1]] = ship;
           }
         } else {
-          throw new Error("Invalid ship placement");
+          return false; // If the ship placement is invalid, return false
         }
       }
 
       ships.push(ship);
+      return true; // If the ship placement is successful, return true
     }
+
+    return false; // If the coordinates are invalid, return false
   }
 
   function _isValidCoords(coordinates) {
