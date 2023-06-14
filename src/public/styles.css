@@ -65,32 +65,27 @@
   background-color: red;
 }
 
+.preview {
+  height: 30px;
+  margin: 3px;
+}
+
 .destroyer-preview {
   width: 80px;
-  height: 40px;
-  margin: 3px;
 }
 
 .submarine-preview {
   width: 120px;
-  height: 40px;
-  margin: 3px;
 }
 
 .cruiser-preview {
   width: 40px;
-  height: 40px;
-  margin: 3px;
 }
 
 .battleship-preview {
   width: 160px;
-  height: 40px;
-  margin: 3px;
 }
 
 .carrier-preview {
   width: 200px;
-  height: 40px;
-  margin: 3px;
 }

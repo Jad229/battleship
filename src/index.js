@@ -20,14 +20,40 @@ const computer = computerFactory("computer", computerBoard);
 renderBoard(playerBoard, playerBoardContainer);
 renderBoard(computerBoard, computerBoardContainer);
 
-// initialize our ships
-const cruiser = shipFactory("cruiser", 1);
-const destroyer = shipFactory("destroyer", 2);
-const submarine = shipFactory("submarine", 3);
-const battleship = shipFactory("battleship", 4);
-const carrier = shipFactory("carrier", 5);
+// Ship initializations
+const shipNames = [
+  "cruiser",
+  "destroyer",
+  "submarine",
+  "battleship",
+  "carrier",
+];
+const ships = shipNames.map((shipName, idx) => shipFactory(shipName, idx + 1));
 
-const ships = [cruiser, destroyer, submarine, battleship, carrier];
+function addShipToBoard(start, end, shipName, boardId, direction) {
+  const startX = Math.min(start[0], end[0]);
+  const endX = Math.max(start[0], end[0]);
+  const startY = Math.min(start[1], end[1]);
+  const endY = Math.max(start[1], end[1]);
+
+  if (direction === 0) {
+    for (let i = startY; i <= endY; i++) {
+      const cellElement = document.querySelector(
+        `#${boardId} div[data-x='${startX}'][data-y='${i}']`
+      );
+      cellElement.classList.add(shipName);
+      cellElement.classList.add("taken");
+    }
+  } else {
+    for (let i = startX; i <= endX; i++) {
+      const cellElement = document.querySelector(
+        `#${boardId} div[data-x='${i}'][data-y='${startY}']`
+      );
+      cellElement.classList.add(shipName);
+      cellElement.classList.add("taken");
+    }
+  }
+}
 
 function addComputerShips() {
   ships.forEach((ship) => {
@@ -36,28 +62,14 @@ function addComputerShips() {
       const [start, end] = generateRandomShipCoords(ship.getLength());
       placed = computerBoard.placeShip(start, end, ship.getLength());
 
-      // After placing the ship
       if (placed) {
-        // If the ship is horizontal
-        if (start[0] === end[0]) {
-          for (let i = start[1]; i <= end[1]; i++) {
-            const cellElement = document.querySelector(
-              `#computer-board div[data-x='${start[0]}'][data-y='${i}']`
-            );
-            cellElement.classList.add(`${ship.getName()}`);
-            cellElement.classList.add("taken");
-          }
-        }
-        // If the ship is vertical
-        else if (start[1] === end[1]) {
-          for (let i = start[0]; i <= end[0]; i++) {
-            const cellElement = document.querySelector(
-              `#computer-board div[data-x='${i}'][data-y='${start[1]}']`
-            );
-            cellElement.classList.add(`${ship.getName()}`);
-            cellElement.classList.add("taken");
-          }
-        }
+        addShipToBoard(
+          start,
+          end,
+          ship.getName(),
+          "computer-board",
+          start[0] === end[0] ? 0 : 1
+        );
       }
     }
   });
@@ -155,25 +167,25 @@ function dropShip(e) {
   if (playerBoard.placeShip(start, end, shipLength)) {
     // If the ship was successfully placed, add it visually
     if (angle === 0) {
-      for (let i = y; i <= end[1]; i++) {
-        const targetCellElement = document.querySelector(
-          `#player-board div[data-x='${x}'][data-y='${i}']`
-        );
-        targetCellElement.classList.add(ship.getName());
-        draggedShip.remove();
-      }
+      addShipToBoard(
+        start,
+        end,
+        ship.getName(),
+        "player-board",
+        angle === 0 ? 0 : 1
+      );
+      draggedShip.remove();
     } else {
-      for (let i = x; i <= end[0]; i++) {
-        const targetCellElement = document.querySelector(
-          `#player-board div[data-x='${i}'][data-y='${y}']`
-        );
-        targetCellElement.classList.add(ship.getName());
-        draggedShip.remove();
-      }
+      addShipToBoard(
+        start,
+        end,
+        ship.getName(),
+        "player-board",
+        angle === 0 ? 0 : 1
+      );
+      draggedShip.remove();
     }
   } else {
-    // If the ship couldn't be placed, show an error message
-    console.error("Invalid ship placement");
     return;
   }
 }
