@@ -160,6 +160,7 @@ function dropShip(e) {
           `#player-board div[data-x='${x}'][data-y='${i}']`
         );
         targetCellElement.classList.add(ship.getName());
+        draggedShip.remove();
       }
     } else {
       for (let i = x; i <= end[0]; i++) {
@@ -167,6 +168,7 @@ function dropShip(e) {
           `#player-board div[data-x='${i}'][data-y='${y}']`
         );
         targetCellElement.classList.add(ship.getName());
+        draggedShip.remove();
       }
     }
   } else {
