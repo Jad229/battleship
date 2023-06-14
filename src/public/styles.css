@@ -1,3 +1,21 @@
+/*========================*/
+/*      Info Styles       */
+/*========================*/
+
+.info-section {
+  width: 200px;
+  margin: auto;
+}
+
+.info-section > * {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/*========================*/
+/*      Board Styles      */
+/*========================*/
+
 .board-section {
   display: flex;
   justify-content: space-evenly;
@@ -14,4 +32,65 @@
   border: 1px solid #000;
   width: 40px;
   height: 40px;
+}
+
+/*========================*/
+/*       Ship Styles      */
+/*========================*/
+
+.options-section {
+  display: flex;
+  align-items: center;
+  height: 250px;
+  padding-left: 15%;
+  background-color: aqua;
+}
+.destroyer {
+  background-color: purple;
+}
+
+.submarine {
+  background-color: green;
+}
+
+.cruiser {
+  background-color: hotpink;
+}
+
+.battleship {
+  background-color: orange;
+}
+
+.carrier {
+  background-color: red;
+}
+
+.destroyer-preview {
+  width: 80px;
+  height: 40px;
+  margin: 3px;
+}
+
+.submarine-preview {
+  width: 120px;
+  height: 40px;
+  margin: 3px;
+}
+
+.cruiser-preview {
+  width: 40px;
+  height: 40px;
+  margin: 3px;
+}
+
+.battleship-preview {
+  width: 160px;
+  height: 40px;
+  margin: 3px;
+}
+
+.carrier-preview {
+  width: 200px;
+  height: 40px;
+  margin: 3px;
 }

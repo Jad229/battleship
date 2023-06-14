@@ -6,9 +6,25 @@
     <title>Battleship</title>
   </head>
   <body>
+    <section class="info-section">
+      <p>Turn: <span></span></p>
+      <p>Details: <span></span></p>
+    </section>
+
     <section class="board-section">
       <div id="player-board" class="board"></div>
       <div id="computer-board" class="board"></div>
     </section>
+
+    <section class="options-section">
+      <div class="cruiser-preview cruiser" draggable="true"></div>
+      <div class="destroyer-preview destroyer" draggable="true"></div>
+      <div class="submarine-preview submarine" draggable="true"></div>
+      <div class="battleship-preview battleship" draggable="true"></div>
+      <div class="carrier-preview carrier" draggable="true"></div>
+    </section>
+
+    <button id="flip-button">FLIP</button>
+    <button id="start-button">START</button>
   </body>
 </html>

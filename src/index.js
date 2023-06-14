@@ -17,36 +17,3 @@ const computer = computerFactory("computer", computerGameboard);
 
 renderBoard(playerGameboard, playerBoardContainer);
 renderBoard(computerGameboard, computerBoardContainer);
-
-//TODO: implement placing of ships
-// Place player's ships
-playerGameboard.placeShip([0, 0], [0, 2], 3);
-playerGameboard.placeShip([1, 0], [1, 2], 3);
-
-// Place computer's ships
-computerGameboard.placeShip([0, 0], [0, 2], 3);
-computerGameboard.placeShip([1, 0], [1, 2], 3);
-
-// // while both players still have ships continue the main loop
-// while (!playerGameboard.allShipsSunk() && !computerGameboard.allShipsSunk()) {
-//   //TODO: player turn
-//   player.attack();
-
-//   if (playerGameboard.allShipsSunk() || computerGameboard.allShipsSunk()) {
-//     break;
-//   }
-
-//   //TODO: computer turn
-//   computer.randomAttack();
-
-//   if (playerGameboard.allShipsSunk() || computerGameboard.allShipsSunk()) {
-//     break;
-//   }
-// }
-
-// // Determine the winner
-// if (playerBoard.allShipsSunk()) {
-//   console.log("Computer wins!");
-// } else {
-//   console.log("Player wins!");
-// }
