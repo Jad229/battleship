@@ -89,3 +89,7 @@
 .carrier-preview {
   width: 200px;
 }
+
+.hover {
+  background-color: gray;
+}

@@ -141,6 +141,40 @@ function dragStart(e) {
 
 function dragOver(e) {
   e.preventDefault();
+
+  const x = parseInt(e.target.dataset.x);
+  const y = parseInt(e.target.dataset.y);
+  const ship = ships[draggedShip.id];
+  const shipLength = ship.getLength();
+
+  let start, end;
+  if (angle === 0) {
+    // horizontal
+    start = y;
+    end = y + shipLength - 1;
+    for (let i = start; i <= end; i++) {
+      const cellElement = document.querySelector(
+        `#player-board div[data-x='${x}'][data-y='${i}']`
+      );
+      if (cellElement && !cellElement.classList.contains("hover")) {
+        cellElement.classList.add("hover");
+        setTimeout(() => cellElement.classList.remove("hover"), 500);
+      }
+    }
+  } else {
+    // vertical
+    start = x;
+    end = x + shipLength - 1;
+    for (let i = start; i <= end; i++) {
+      const cellElement = document.querySelector(
+        `#player-board div[data-x='${i}'][data-y='${y}']`
+      );
+      if (cellElement && !cellElement.classList.contains("hover")) {
+        cellElement.classList.add("hover");
+        setTimeout(() => cellElement.classList.remove("hover"), 500);
+      }
+    }
+  }
 }
 
 function dropShip(e) {
