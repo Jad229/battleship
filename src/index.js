@@ -115,12 +115,6 @@ function flip() {
 
 flipButton.addEventListener("click", flip);
 
-const startButton = document.getElementById("start-button");
-
-startButton.addEventListener("click", () => {
-  addComputerShips();
-});
-
 // Drag player ships
 let draggedShip;
 const shipOptions = Array.from(
@@ -223,3 +217,47 @@ function dropShip(e) {
     return;
   }
 }
+
+let gameOver = false;
+let playerTurn;
+const turnDisplay = document.getElementById("turn-details");
+const infoDisplay = document.getElementById("details");
+
+function startGame() {
+  const optionsContainer = document.querySelector(".options-section").children;
+
+  if (optionsContainer.length != 0) {
+    infoDisplay.textContent = "Please place all your pieces!";
+  } else {
+    const allComputerCells = document.querySelectorAll("#computer-board div");
+    allComputerCells.forEach((cell) =>
+      cell.addEventListener("click", handleClick)
+    );
+    addComputerShips();
+  }
+}
+
+function handleClick(e) {
+  const x = parseInt(e.target.dataset.x);
+  const y = parseInt(e.target.dataset.y);
+  if (!gameOver) {
+    if (e.target.classList.contains("taken")) {
+      computerBoard.receiveAttack([x, y]);
+
+      e.target.classList.add("hit");
+
+      if (computerBoard.allShipsSunk()) {
+        infoDisplay.textContent = "You Win!";
+      } else {
+        infoDisplay.textContent = "You landed a hit!";
+      }
+    } else {
+      computerBoard.receiveAttack([x, y]);
+      e.target.classList.add("miss");
+      infoDisplay.textContent = "You missed.";
+    }
+  }
+}
+const startButton = document.getElementById("start-button");
+
+startButton.addEventListener("click", startGame);
